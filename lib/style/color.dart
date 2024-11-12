@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/**
+ *  维度： 主次、控件分类
+ */
 class AppColor {
   /// 页面背景颜色
   static const Color scaffoldBackground = Color(0xFFFFFFFF);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ducafecat_news_getx/common/values/values.dart';
-import 'package:flutter_ducafecat_news_getx/common/widgets/widgets.dart';
+import 'package:flutter_ducafecat_news_getx/components/widgets.dart';
 import 'package:flutter_ducafecat_news_getx/pages/category/index.dart';
 import 'package:flutter_ducafecat_news_getx/pages/main/index.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

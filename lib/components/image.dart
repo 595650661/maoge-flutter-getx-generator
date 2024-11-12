@@ -10,8 +10,10 @@ Widget netImageCached(
   double height = 48,
   EdgeInsetsGeometry? margin,
 }) {
+  print("=============== url: $url");
   return CachedNetworkImage(
-    imageUrl: url,
+    imageUrl:
+        "https://www.keaitupian.cn/cjpic/frombd/2/253/1676065055/2828606542.jpg",
     imageBuilder: (context, imageProvider) => Container(
       height: height.h,
       width: width.w,

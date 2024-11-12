@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ducafecat_news_getx/common/apis/apis.dart';
+import 'package:flutter_ducafecat_news_getx/apis/apis.dart';
 import 'package:flutter_ducafecat_news_getx/common/entities/entities.dart';
-import 'package:flutter_ducafecat_news_getx/common/utils/utils.dart';
-import 'package:flutter_ducafecat_news_getx/common/widgets/widgets.dart';
+import 'package:flutter_ducafecat_news_getx/utils/utils.dart';
+import 'package:flutter_ducafecat_news_getx/components/widgets.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';

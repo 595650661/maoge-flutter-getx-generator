@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ducafecat_news_getx/common/middlewares/middlewares.dart';
+import 'package:flutter_ducafecat_news_getx/middlewares/middlewares.dart';
 import 'package:flutter_ducafecat_news_getx/pages/application/index.dart';
 import 'package:flutter_ducafecat_news_getx/pages/category/index.dart';
 import 'package:flutter_ducafecat_news_getx/pages/frame/sign_in/index.dart';
@@ -57,5 +57,4 @@ class AppPages {
   //   name: AppRoutes.NotFound,
   //   page: () => NotfoundView(),
   // );
-
 }

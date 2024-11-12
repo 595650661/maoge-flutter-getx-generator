@@ -1,5 +1,5 @@
-import 'package:flutter_ducafecat_news_getx/common/routers/routes.dart';
-import 'package:flutter_ducafecat_news_getx/common/store/store.dart';
+import 'package:flutter_ducafecat_news_getx/routers/routes.dart';
+import 'package:flutter_ducafecat_news_getx/store/store.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';

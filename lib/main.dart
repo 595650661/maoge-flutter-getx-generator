@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ducafecat_news_getx/common/langs/translation_service.dart';
-import 'package:flutter_ducafecat_news_getx/common/routers/pages.dart';
-import 'package:flutter_ducafecat_news_getx/common/store/store.dart';
-import 'package:flutter_ducafecat_news_getx/common/style/style.dart';
-import 'package:flutter_ducafecat_news_getx/common/utils/utils.dart';
+import 'package:flutter_ducafecat_news_getx/langs/translation_service.dart';
+import 'package:flutter_ducafecat_news_getx/routers/pages.dart';
+import 'package:flutter_ducafecat_news_getx/store/store.dart';
+import 'package:flutter_ducafecat_news_getx/style/style.dart';
+import 'package:flutter_ducafecat_news_getx/utils/utils.dart';
 import 'package:flutter_ducafecat_news_getx/global.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,8 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      // 设计图尺寸
       designSize: Size(375, 812),
       builder: () => RefreshConfiguration(
+        // 设置全局刷新配置   pull_to_refresh
         headerBuilder: () => ClassicHeader(),
         footerBuilder: () => ClassicFooter(),
         hideFooterWhenNotFull: true,
@@ -32,10 +34,10 @@ class MyApp extends StatelessWidget {
           title: 'News',
           theme: AppTheme.light,
           debugShowCheckedModeBanner: false,
-          initialRoute: AppPages.INITIAL,
-          getPages: AppPages.routes,
+          initialRoute: AppPages.INITIAL, //初始路由
+          getPages: AppPages.routes, //路由
           builder: EasyLoading.init(),
-          translations: TranslationService(),
+          translations: TranslationService(), //国际化
           navigatorObservers: [AppPages.observer],
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,

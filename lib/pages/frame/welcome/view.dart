@@ -38,7 +38,7 @@ class WelcomePage extends GetView<WelcomeController> {
           fontFamily: "Avenir",
           fontWeight: FontWeight.normal,
           fontSize: 16.sp,
-          height: 1.3,
+          height: 1.3, // 行距
         ),
       ),
     );
@@ -61,7 +61,7 @@ class WelcomePage extends GetView<WelcomeController> {
               fit: BoxFit.none,
             ),
           ),
-          Spacer(),
+          Spacer(), //
           Container(
             width: 195.w,
             child: Text(
@@ -141,7 +141,7 @@ class WelcomePage extends GetView<WelcomeController> {
               "You can get Premium to unlock hundreds of publications",
               40,
             ),
-            Spacer(),
+            Spacer(), // 撑开。占剩余空间
             _buildStartButton(context),
           ],
         ),
