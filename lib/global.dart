@@ -15,8 +15,10 @@ class Global {
     setSystemUi();
     Loading();
 
+    // 异步注册，适用于如网络请求、读取本地文件等
     await Get.putAsync<StorageService>(() => StorageService().init());
-
+    // 使用Get.put()来，【同步注册】一个控制器或者服务。
+    // 适用于：初始化过程比较简单、不需要等待异步操作完成的对象。
     Get.put<ConfigStore>(ConfigStore());
     Get.put<UserStore>(UserStore());
   }

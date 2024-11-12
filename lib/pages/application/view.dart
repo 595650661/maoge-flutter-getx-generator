@@ -54,8 +54,8 @@ class ApplicationPage extends GetView<ApplicationController> {
           currentIndex: controller.state.page,
           // fixedColor: AppColors.primaryElement,
           type: BottomNavigationBarType.fixed,
-          onTap: controller.handleNavBarTap,
-          showSelectedLabels: false,
+          onTap: controller.handleTabBarTap,
+          showSelectedLabels: true,
           showUnselectedLabels: false,
         ));
   }

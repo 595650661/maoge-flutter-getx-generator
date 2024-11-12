@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
 
 class ConfigStore extends GetxController {
-  static ConfigStore get to => Get.find();
-
+  // 单例
+  static ConfigStore get to => Get.find<ConfigStore>();
+  // 是否是第一次打开
   bool isFirstOpen = false;
   PackageInfo? _platform;
   String get version => _platform?.version ?? '-';
@@ -20,7 +21,8 @@ class ConfigStore extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    isFirstOpen = StorageService.to.getBool(STORAGE_DEVICE_FIRST_OPEN_KEY);
+    isFirstOpen =
+        StorageService.to.getBool(STORAGE_DEVICE_FIRST_OPEN_KEY) ?? true;
   }
 
   Future<void> getPlatform() async {

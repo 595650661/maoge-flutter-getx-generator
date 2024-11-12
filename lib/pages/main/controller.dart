@@ -53,7 +53,9 @@ class MainController extends GetxController {
 
   /// 事件
 
-  /// 生命周期
+  //
+  // ------  lifecycle ------
+  //
 
   /// 初始
   @override

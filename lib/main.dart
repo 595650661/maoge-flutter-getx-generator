@@ -12,7 +12,9 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 Future<void> main() async {
+  // 初始化
   await Global.init();
+  //
   runApp(MyApp());
 }
 

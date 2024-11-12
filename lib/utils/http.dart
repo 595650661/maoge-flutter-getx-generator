@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_ducafecat_news_getx/store/store.dart';
 import 'package:flutter_ducafecat_news_getx/utils/utils.dart';
@@ -32,11 +33,11 @@ class HttpUtil {
       baseUrl: SERVER_API_URL,
 
       // baseUrl: storage.read(key: STORAGE_KEY_APIURL) ?? SERVICE_API_BASEURL,
-      //连接服务器超时时间，单位是毫秒.
-      connectTimeout: 10000,
+      //连接服务器超时时间
+      connectTimeout: Duration(seconds: 10),
 
       // 响应流上前后两次接受到数据的间隔，单位为毫秒。
-      receiveTimeout: 5000,
+      receiveTimeout: Duration(seconds: 5),
 
       // Http请求头.
       headers: {},
@@ -90,6 +91,23 @@ class HttpUtil {
         // 这样请求将会被终止，上层then会被调用，then中返回的数据将是你的自定义response.
       },
     ));
+
+    // 在调试模式下需要抓包调试
+    // 在调试模式下需要抓包调试，所以我们使用代理，并禁用HTTPS证书校验
+    if (!IS_RELEASE_MODE) {
+      LogD("开启代理");
+      (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.findProxy = (uri) {
+          // 返回代理服务器的地址和端口
+          return 'PROXY 127.0.0.1:8888';
+        };
+// 忽略SSL证书验证（在开发环境下可能需要这样做，实际发布时不建议）
+        client.badCertificateCallback = (cert, host, port) {
+          return true;
+        };
+      };
+    }
   }
 
   /*
@@ -115,63 +133,64 @@ class HttpUtil {
 
   // 错误信息
   ErrorEntity createErrorEntity(DioError error) {
-    switch (error.type) {
-      case DioErrorType.cancel:
-        return ErrorEntity(code: -1, message: "请求取消");
-      case DioErrorType.connectTimeout:
-        return ErrorEntity(code: -1, message: "连接超时");
-      case DioErrorType.sendTimeout:
-        return ErrorEntity(code: -1, message: "请求超时");
-      case DioErrorType.receiveTimeout:
-        return ErrorEntity(code: -1, message: "响应超时");
-      case DioErrorType.cancel:
-        return ErrorEntity(code: -1, message: "请求取消");
-      case DioErrorType.response:
-        {
-          try {
-            int errCode =
-                error.response != null ? error.response!.statusCode! : -1;
-            // String errMsg = error.response.statusMessage;
-            // return ErrorEntity(code: errCode, message: errMsg);
-            switch (errCode) {
-              case 400:
-                return ErrorEntity(code: errCode, message: "请求语法错误");
-              case 401:
-                return ErrorEntity(code: errCode, message: "没有权限");
-              case 403:
-                return ErrorEntity(code: errCode, message: "服务器拒绝执行");
-              case 404:
-                return ErrorEntity(code: errCode, message: "无法连接服务器");
-              case 405:
-                return ErrorEntity(code: errCode, message: "请求方法被禁止");
-              case 500:
-                return ErrorEntity(code: errCode, message: "服务器内部错误");
-              case 502:
-                return ErrorEntity(code: errCode, message: "无效的请求");
-              case 503:
-                return ErrorEntity(code: errCode, message: "服务器挂了");
-              case 505:
-                return ErrorEntity(code: errCode, message: "不支持HTTP协议请求");
-              default:
-                {
-                  // return ErrorEntity(code: errCode, message: "未知错误");
-                  return ErrorEntity(
-                    code: errCode,
-                    message: error.response != null
-                        ? error.response!.statusMessage!
-                        : "",
-                  );
-                }
-            }
-          } on Exception catch (_) {
-            return ErrorEntity(code: -1, message: "未知错误");
-          }
-        }
-      default:
-        {
-          return ErrorEntity(code: -1, message: error.message);
-        }
-    }
+    // switch (error.type) {
+    //   case DioErrorType.cancel:
+    //     return ErrorEntity(code: -1, message: "请求取消");
+    //   case DioErrorType.connectTimeout:
+    //     return ErrorEntity(code: -1, message: "连接超时");
+    //   case DioErrorType.sendTimeout:
+    //     return ErrorEntity(code: -1, message: "请求超时");
+    //   case DioErrorType.receiveTimeout:
+    //     return ErrorEntity(code: -1, message: "响应超时");
+    //   case DioErrorType.cancel:
+    //     return ErrorEntity(code: -1, message: "请求取消");
+    //   case DioErrorType.response:
+    //     {
+    //       try {
+    //         int errCode =
+    //             error.response != null ? error.response!.statusCode! : -1;
+    //         // String errMsg = error.response.statusMessage;
+    //         // return ErrorEntity(code: errCode, message: errMsg);
+    //         switch (errCode) {
+    //           case 400:
+    //             return ErrorEntity(code: errCode, message: "请求语法错误");
+    //           case 401:
+    //             return ErrorEntity(code: errCode, message: "没有权限");
+    //           case 403:
+    //             return ErrorEntity(code: errCode, message: "服务器拒绝执行");
+    //           case 404:
+    //             return ErrorEntity(code: errCode, message: "无法连接服务器");
+    //           case 405:
+    //             return ErrorEntity(code: errCode, message: "请求方法被禁止");
+    //           case 500:
+    //             return ErrorEntity(code: errCode, message: "服务器内部错误");
+    //           case 502:
+    //             return ErrorEntity(code: errCode, message: "无效的请求");
+    //           case 503:
+    //             return ErrorEntity(code: errCode, message: "服务器挂了");
+    //           case 505:
+    //             return ErrorEntity(code: errCode, message: "不支持HTTP协议请求");
+    //           default:
+    //             {
+    //               // return ErrorEntity(code: errCode, message: "未知错误");
+    //               return ErrorEntity(
+    //                 code: errCode,
+    //                 message: error.response != null
+    //                     ? error.response!.statusMessage!
+    //                     : "",
+    //               );
+    //             }
+    //         }
+    //       } on Exception catch (_) {
+    //         return ErrorEntity(code: -1, message: "未知错误");
+    //       }
+    //     }
+    //   default:
+    //     {
+    // return ErrorEntity(code: -1, message: error.message);
+    //     }
+    // }
+    return ErrorEntity(code: -1, message: 'error.message');
   }
 
   /*

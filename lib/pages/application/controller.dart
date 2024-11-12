@@ -20,7 +20,7 @@ class ApplicationController extends GetxController {
 
   /// 成员变量
 
-  // tab 页标题
+  // 底部 tab 页标题
   late final List<String> tabTitles;
 
   // 页控制器
@@ -32,7 +32,7 @@ class ApplicationController extends GetxController {
   /// 事件
 
   // tab栏动画
-  void handleNavBarTap(int index) {
+  void handleTabBarTap(int index) {
     pageController.animateToPage(index,
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
   }
@@ -144,6 +144,7 @@ class ApplicationController extends GetxController {
         backgroundColor: AppColors.primaryBackground,
       ),
     ];
+    //
     pageController = new PageController(initialPage: state.page);
   }
 

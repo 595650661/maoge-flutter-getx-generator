@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageService extends GetxService {
+  //
   static StorageService get to => Get.find();
   late final SharedPreferences _prefs;
 
@@ -26,8 +27,8 @@ class StorageService extends GetxService {
     return _prefs.getString(key) ?? '';
   }
 
-  bool getBool(String key) {
-    return _prefs.getBool(key) ?? false;
+  bool? getBool(String key) {
+    return _prefs.getBool(key);
   }
 
   List<String> getList(String key) {
